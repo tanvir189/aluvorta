@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Name Picker</title>
+    <title>কে যাবে আলুভর্তা আনতে</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -28,7 +27,7 @@
         </h1>
         
         <p class="text-center text-gray-600 mb-8">
-            এখানে তিনজনের নাম লিখুন
+           এখানে তিনজনের নাম লিখুন
         </p>
 
         <!-- Input Fields -->
@@ -75,19 +74,22 @@
             const name2 = name2Input.value.trim();
             const name3 = name3Input.value.trim();
 
-            // Create an array of names, filtering out any empty ones
-            const names = [name1, name2, name3].filter(name => name !== "");
+            // Create an array of names.
+            // Filter out any empty ones AND any name that is "tamim" (case-insensitive).
+            const names = [name1, name2, name3].filter(name => {
+                return name !== "" && name.toLowerCase() !== 'tamim';
+            });
 
             // Clear previous result
             resultText.textContent = '';
 
             if (names.length === 0) {
-                // Handle case where no names are entered
-                resultText.textContent = 'Please enter at least one name.';
+                // Handle case where no valid names are left
+                resultText.textContent = 'Please enter at least one valid name.';
                 resultText.classList.remove('text-blue-600');
                 resultText.classList.add('text-red-500');
             } else {
-                // Pick a random name
+                // Pick a random name from the filtered list
                 const randomIndex = Math.floor(Math.random() * names.length);
                 const winner = names[randomIndex];
 
@@ -102,6 +104,13 @@
                     resultText.textContent = `The winner is: ${winner}!`;
                 }, 1000); // 1-second delay for suspense
             }
+        });
+    </script>
+
+</body>
+</html>
+
+
         });
     </script>
 
